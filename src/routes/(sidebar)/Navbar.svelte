@@ -31,9 +31,10 @@
     fluid?: boolean;
     drawerHidden?: boolean;
     list?: boolean;
+    user?: { name?: string; email?: string; avatar?: string };
   }
 
-  let { fluid = true, drawerHidden = $bindable(false), list = false }: Props = $props();
+  let { fluid = true, drawerHidden = $bindable(false), list = false, user }: Props = $props();
 
   const menu = [
     { name: 'Sales', href: '/', icon: ShoppingBagSolid },
@@ -119,7 +120,7 @@
     <NotificationList {notifications} />
     <AppsMenu {menu} />
     <DarkMode />
-    <UserMenu {...Users[4]} {menuItems}>
+    <UserMenu name={user?.name ?? Users[4].name} email={user?.email ?? Users[4].email} avatar={user?.avatar ?? Users[4].avatar} {menuItems}>
       <DropdownDivider />
       <DropdownItem>
         <a href="/sign-out" target="_self">Sign out</a>

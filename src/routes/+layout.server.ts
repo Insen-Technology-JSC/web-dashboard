@@ -22,6 +22,7 @@ export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
           email: traits?.email,
           avatar: traits?.avatar_url
         };
+        console.log('[LayoutServerLoad]Loaded user from session:', user);
       } catch {
         // ignore parse errors
       }
