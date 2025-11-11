@@ -41,6 +41,7 @@
       fn.call(this, event);
     };
   };
+
   const handler = () => {
     alert('Submitted!');
   };
@@ -57,7 +58,7 @@
       <h1 class={cardH1Cls}>
         {title}
       </h1>
-      <form class="mt-8 space-y-6" onsubmit={preventDefault(handler)} {...restProps}>
+      <form method="POST"  class="mt-8 space-y-6"  {...restProps}>
         {@render children()}
         {#if rememberMe || lostPassword}
           <div class="flex items-start">

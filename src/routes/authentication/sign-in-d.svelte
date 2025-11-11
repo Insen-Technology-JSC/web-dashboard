@@ -2,6 +2,7 @@
   import { Label, Input } from 'flowbite-svelte';
   import { SignIn } from '$lib';
   import MetaTag from '../utils/MetaTag.svelte';
+
   let title = 'Sign in to platform';
   let site = {
     name: 'Flowbite',
@@ -9,6 +10,7 @@
     link: '/',
     imgAlt: 'FlowBite Logo'
   };
+
   let rememberMe = true;
   let lostPassword = true;
   let createAccount = true;
@@ -25,10 +27,11 @@
       const [key, value] = field;
       data[key] = value;
     }
+
     console.log(data);
   };
 
-  const path: string = '/authentication/sign-in';
+  const path: string = '/sign-in';
   const description: string = 'Sign in example - Flowbite Svelte Admin Dashboard';
   const metaTitle: string = 'Flowbite Svelte Admin Dashboard - Sign in';
   const subtitle: string = 'Sign in';
@@ -39,7 +42,14 @@
 <SignIn {title} {site} {rememberMe} {lostPassword} {createAccount} {lostPasswordLink} {loginTitle} {registerLink} {createAccountTitle} onsubmit={onSubmit}>
   <div>
     <Label for="email" class="mb-2 dark:text-white">Your email</Label>
-    <Input type="email" name="email" id="email" placeholder="name@company.com" required class="border outline-none dark:border-gray-600 dark:bg-gray-700" />
+    <input
+      name="emailOrPhone"
+      type="text"
+      required
+      placeholder="Enter your email or phone number"
+      title="Please enter a valid email or phone number"
+      class="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+    />
   </div>
   <div>
     <Label for="password" class="mb-2 dark:text-white">Your password</Label>

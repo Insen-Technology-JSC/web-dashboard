@@ -3,10 +3,10 @@ import { redirect } from '@sveltejs/kit';
 
 const isPublicPath = (pathname: string) => {
     if (
-        pathname === '/login' || //login
+        pathname === '/sign-in' || //login
         pathname.startsWith('/authentication') ||
-        pathname.startsWith('/authentication/sign-in') ||
-        pathname.startsWith('/authentication/sign-up') ||
+        pathname.startsWith('/sign-in') ||
+        pathname.startsWith('/sign-up') ||
         pathname.startsWith('/authentication/forgot-password') ||
         pathname.startsWith('/api') ||
         pathname.startsWith('/sitemap.xml') ||

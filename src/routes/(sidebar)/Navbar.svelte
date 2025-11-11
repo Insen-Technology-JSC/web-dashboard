@@ -121,7 +121,9 @@
     <DarkMode />
     <UserMenu {...Users[4]} {menuItems}>
       <DropdownDivider />
-      <DropdownItem>Sign out</DropdownItem>
+      <DropdownItem>
+        <a href="/sign-out" target="_self">Sign out</a>
+      </DropdownItem>
     </UserMenu>
   </div>
 </Navbar>

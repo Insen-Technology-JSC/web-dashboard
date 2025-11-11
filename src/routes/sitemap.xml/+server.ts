@@ -11,7 +11,7 @@ const pages: string[] = [
   'errors/400',
   'errors/404',
   'errors/500',
-  'authentication/sign-in',
+  'sign-in',
   'authentication/sign-up',
   'authentication/forgot-password',
   'authentication/reset-password',
