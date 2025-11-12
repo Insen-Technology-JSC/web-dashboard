@@ -2,6 +2,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { CookieStore } from '$lib/server/CookieStore';
+import { dev } from '$app/environment';
 
 export const load: PageServerLoad = async ({ cookies }) => {
     const session = cookies.get('session');
@@ -11,6 +12,10 @@ export const load: PageServerLoad = async ({ cookies }) => {
 
 export const actions: Actions = {
     default: async ({ request, cookies }) => {
+        if (dev) {
+            console.log('Running in development mode');
+        }
+
         const store = new CookieStore(cookies);
         const formData = await request.formData();
         let identifier = String(formData.get('emailOrPhone') || '').trim();
@@ -32,9 +37,9 @@ export const actions: Actions = {
         // Two-step login flow (Insentecs ID):
         // 1) Create login flow (GET)
         // 2) Submit login (POST with ?flow=ID and JSON body)
-        const ID_BASE = env.ID_BASE ?? 'https://id.insentecs.cloud';
-        const createFlowUrl = `${ID_BASE.replace(/\/$/, '')}/self-service/login/api`;
-
+        const AUTH_API_URL = env.AUTH_API_URL ?? '';
+        const createFlowUrl = `${AUTH_API_URL.replace(/\/$/, '')}/self-service/login/api`;
+        console.log(`[login] AUTH_API_URL=%s`, AUTH_API_URL);
         try {
             const serverFetch = globalThis.fetch;
             const createRes = await serverFetch(createFlowUrl, { method: 'GET' });
@@ -68,7 +73,7 @@ export const actions: Actions = {
                 return fail(500, { message: 'Login flow error (no id)' });
             }
 
-            const submitUrl = `${ID_BASE.replace(/\/$/, '')}/self-service/login?flow=${encodeURIComponent(flowId)}`;
+            const submitUrl = `${AUTH_API_URL.replace(/\/$/, '')}/self-service/login?flow=${encodeURIComponent(flowId)}`;
             const body = {
                 csrf_token: csrfToken,
                 identifier,

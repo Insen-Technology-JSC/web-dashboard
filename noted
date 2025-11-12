@@ -1,0 +1,9 @@
+# Development (default)
+pnpm dev
+
+# Staging
+pnpm dev --mode staging
+
+# Production
+pnpm build --mode production
+pnpm preview

@@ -77,6 +77,14 @@ export class CookieStore {
     static decode(b64: string): string {
         return Buffer.from(b64, 'base64').toString('utf8');
     }
+
+    clearAll(): void {
+        // Lấy danh sách tất cả cookie hiện có
+        const all = this.cookies.getAll();
+        for (const cookie of all) {
+            this.cookies.delete(cookie.name, { path: this.defaults.path });
+        }
+    }
 }
 
 

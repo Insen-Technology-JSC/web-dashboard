@@ -4,7 +4,7 @@ import { CookieStore } from '$lib/server/CookieStore';
 
 export const GET: RequestHandler = async ({ cookies }) => {
     const store = new CookieStore(cookies);
-    store.set('session', ``, { maxAge: 60 * 60 * 24 });
+    store.clearAll();
     throw redirect(303, '/sign-in');
 };
 
