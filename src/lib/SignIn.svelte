@@ -58,7 +58,7 @@
       <h1 class={cardH1Cls}>
         {title}
       </h1>
-      <form method="POST"  class="mt-8 space-y-6"  {...restProps}>
+      <div class="mt-8 space-y-6">
         {@render children()}
         {#if rememberMe || lostPassword}
           <div class="flex items-start">
@@ -76,7 +76,7 @@
             Not registered? <A href={registerLink}>{createAccountTitle}</A>
           </div>
         {/if}
-      </form>
+      </div>
     </Card>
   </div>
 </main>

@@ -82,7 +82,7 @@ export const actions: Actions = {
             });
 
             const submitText = await submitRes.text();
-            console.log('[login] submit status=%d flow=%s', submitRes.status, flowId);
+            console.log('[login] submit status=%d flow=%s, okay: %s', submitRes.status, flowId, submitRes.ok);
 
             if (!submitRes.ok) {
                 console.warn('[login] submit failed status=%d body=%s', submitRes.status, submitText);
@@ -92,10 +92,11 @@ export const actions: Actions = {
                     const fromUi = errJson.ui?.messages?.[0]?.text;
                     const fromRoot = errJson.messages?.[0]?.text;
                     message = fromUi || fromRoot || message;
+                    console.warn('[login] submitRes.ok false message=', message);
                 } catch {
-                    // ignore JSON parse error
+                    console.warn('[login] ignore JSON parse error');
                 }
-                return fail(submitRes.status === 401 ? 401 : 400, { message });
+                return fail(submitRes.status, { message: message });
             }
 
             // Log and persist success body (truncate for cookie size)
