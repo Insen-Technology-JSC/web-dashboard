@@ -8,7 +8,12 @@ declare global {
     // interface PageState {}
     // interface Platform {}
     interface Locals {
-      user: { authenticated: boolean } | null;
+      user: {
+        authenticated: boolean;
+        id: string | null;
+        token: string | null;
+
+      } | null;
     }
   }
 

@@ -90,8 +90,8 @@
 
 <Navbar class="mx-10 sm:mx-0">
   <NavBrand href="/" class="mx-10">
-    <img src="/images/flowbite-svelte-icon-logo.svg" class="me-2.5 h-6 sm:h-8" alt="Flowbite Logo" />
-    <span class="ml-px self-center text-xl font-semibold whitespace-nowrap sm:text-2xl dark:text-white"> Flowbite </span>
+    <img src="/images/ic_launcher.png" class="me-2.5 h-6 sm:h-8" alt="Flowbite Logo" />
+    <span class="ml-px self-center text-xl font-semibold whitespace-nowrap sm:text-2xl dark:text-white"> Genki </span>
   </NavBrand>
   <div class="hidden lg:block lg:ps-3">
     {#if list}

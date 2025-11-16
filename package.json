@@ -41,6 +41,7 @@
     "@tailwindcss/vite": "^4.1.13",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/svelte": "^5.2.8",
+    "@types/leaflet": "^1.9.21",
     "apexcharts": "^5.3.5",
     "dayjs": "^1.11.18",
     "eslint": "^9.35.0",
@@ -83,6 +84,9 @@
     "@flowbite-svelte-plugins/chart": "^0.2.4",
     "flowbite-svelte": "^1.13.8",
     "flowbite-svelte-icons": "^3.0.0",
+    "leaflet": "^1.9.4",
+    "mapbox-gl": "^3.16.0",
+    "node-fetch": "3",
     "tailwind-merge": "^3.3.1"
   },
   "keywords": [

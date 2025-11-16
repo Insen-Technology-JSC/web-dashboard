@@ -7,3 +7,11 @@ pnpm dev --mode staging
 # Production
 pnpm build --mode production
 pnpm preview
+
+
+/// deploy firebase
+firebase login
+firebase use --add
+firebase init hosting
+npm run build
+firebase deploy

@@ -118,7 +118,6 @@ export const actions: Actions = {
                 console.log('[login] submit success (non-JSON body) len=%d', submitText.length);
             }
             store.setSessionBody(submitText, { maxAge: 60 * 60 * 24 });
-
             // If the ID service returns a session token/cookie, the cookie will be set by that domain.
             // Here, mirror a minimal session cookie locally so our guard allows navigation.
             store.set('session', `id-flow:${flowId}:${identifier}`, { maxAge: 60 * 60 * 24 });

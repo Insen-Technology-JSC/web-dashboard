@@ -23,6 +23,11 @@ const isPublicPath = (pathname: string) => {
 export const handle: Handle = async ({ event, resolve }) => {
     const { url, cookies } = event;
     const session = cookies.get('session');
+    event.locals.user = {
+        id: cookies.get('user_id') || null,
+        token: cookies.get('token') || null,
+        authenticated: session ? true : false,
+    };
 
     // If not logged in and trying to access a non-public page, redirect to /login
     if (!session && !isPublicPath(url.pathname)) {
