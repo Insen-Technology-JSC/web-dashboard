@@ -39,7 +39,7 @@
 
   let posts = [
     { name: 'Homes', Icon: HomeSolid, href: '/homes' },
-    { name: 'Homes1', Icon: HomeSolid, href: '/settings' },
+    { name: 'Homes1', Icon: HomeSolid, href: '/maps' },
     { name: 'Dashboard', Icon: ChartPieOutline, href: '/dashboard' }
   ];
 </script>

@@ -20,10 +20,21 @@ export interface Home {
 }
 
 export interface HomePosition {
-    id: number;
+    id: string;
     name: string;
     lat: number;
     long: number;
     status: boolean; // true = online, false = offline
     address?: string; // optional address field
+}
+
+export interface ApiHome {
+  hub_id: string;
+  name: string;
+  connected: boolean;
+  address?: string;
+  location?: {
+    lat?: number;
+    long?: number;
+  };
 }

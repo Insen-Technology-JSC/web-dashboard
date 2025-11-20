@@ -5,14 +5,25 @@
   import mapboxgl from 'mapbox-gl';
 
   let mapDiv: HTMLDivElement;
-  // Generate 3 homes
-  const homes: HomePosition[] = [
-    { id: 1, name: 'Genki dev', lat: 10.776, long: 106.7, status: true, address: '123 Main St, City, Country' },
-    { id: 2, name: 'Home B', lat: 10.78, long: 106.705, status: false, address: ' ' },
-    { id: 3, name: 'Home C', lat: 10.782, long: 106.71, status: true }
-  ];
-
+  export let homes: HomePosition[] = [];
   let map: mapboxgl.Map;
+  function getCenter(homes: HomePosition[]) {
+    if (!homes.length) return null;
+
+    const sum = homes.reduce(
+      (acc, home) => {
+        acc.lat += home.lat;
+        acc.long += home.long;
+        return acc;
+      },
+      { lat: 0, long: 0 }
+    );
+
+    const centerLat = sum.lat / homes.length;
+    const centerLong = sum.long / homes.length;
+
+    return { lat: centerLat, long: centerLong };
+  }
 
   function createMarkerElement(home: HomePosition) {
     const container = document.createElement('div');
@@ -39,7 +50,6 @@
     container.appendChild(icon);
     container.appendChild(label);
 
-    // === thêm popup hover ===
     const popup = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: false
@@ -51,8 +61,6 @@
     return container;
   }
 
-  // const el = createMarkerElement('Genki Dev', true);
-
   onMount(async () => {
     const mapboxgl = await import('mapbox-gl');
     mapboxgl.default.accessToken = 'pk.eyJ1IjoiaW5zZW4iLCJhIjoiY2xrMjI5ajJ4MGFrZjNnbXY2OXRhd3h6NCJ9.SMlcq6iPiCA0nMWAlveW_g';
@@ -60,8 +68,8 @@
       container: mapDiv,
       interactive: true,
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [106.67499704182997, 10.7746407831968],
-      zoom: 15,
+      center: [getCenter(homes)?.long || 0, getCenter(homes)?.lat || 0],
+      zoom: 8,
       doubleClickZoom: true
     });
 

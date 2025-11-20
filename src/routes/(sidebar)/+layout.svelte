@@ -19,8 +19,8 @@
   <Navbar bind:drawerHidden user={data.user} />
 </header>
 <div class="overflow-hidden lg:flex">
-  <Sidebar bind:drawerHidden {docsRoute} />
-  <div class="relative h-full w-full overflow-y-auto pt-[70px] lg:ml-64">
+  <!-- <Sidebar bind:drawerHidden {docsRoute} /> -->
+  <div class="h-full w-full pt-[56px] pb-[156px]">
     {@render children()}
   </div>
 </div>

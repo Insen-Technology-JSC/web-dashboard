@@ -5,6 +5,7 @@ const json = (r: Response) => r.json();
 // export const prerender = true;
 
 export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
+
   try {
     const posts = await fetch('/api/posts').then(json);
     const ANALYTICS_ID = env.ANALYTICS_ID;

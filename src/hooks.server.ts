@@ -31,11 +31,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // If not logged in and trying to access a non-public page, redirect to /login
     if (!session && !isPublicPath(url.pathname)) {
-        throw redirect(303, '/authentication/sign-in');
+        throw redirect(303, '/sign-in');
     }
 
     // If logged in and trying to access /login, send to dashboard
-    if (session && url.pathname === '/authentication/sign-in') {
+    if (session && url.pathname === '/sign-in') {
         throw redirect(303, '/');
     }
 
