@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { env } from '$env/dynamic/private';
 import { CookieStore } from '$lib/server/CookieStore';
 import fetch from 'node-fetch';
-import type { HomePosition, ApiHome } from '$lib/types/home';
+import type { HomePosition, HomeInfoRes } from '$lib/types/home';
 const TAG = '[home_map]';
 
 
@@ -57,7 +57,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     const TOKEN = 'Bearer ' + token;
     try {
         const listHome = await getHomesList(USER_ID, TOKEN);
-        const homePositions: HomePosition[] = (listHome as ApiHome[])
+        const homePositions: HomePosition[] = (listHome as HomeInfoRes[])
             .filter(h => h.location && typeof h.location.lat === 'number' && typeof h.location.long === 'number')
             .map((h) => ({
                 id: h.hub_id,

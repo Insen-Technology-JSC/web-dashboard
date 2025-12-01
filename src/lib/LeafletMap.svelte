@@ -3,6 +3,7 @@
   import 'mapbox-gl/dist/mapbox-gl.css';
   import type { HomePosition } from '$lib/types/home';
   import mapboxgl from 'mapbox-gl';
+  import { goto } from '$app/navigation';
 
   let mapDiv: HTMLDivElement;
   export let homes: HomePosition[] = [];
@@ -26,40 +27,49 @@
   }
 
   function createMarkerElement(home: HomePosition) {
-    const container = document.createElement('div');
-    container.className = 'flex items-center gap-1';
+  const container = document.createElement('div');
+  container.className = 'flex items-center gap-1';
+  container.style.cursor = 'pointer'; // con trỏ dạng pointer khi hover
 
-    // icon
-    const icon = document.createElement('div');
-    icon.style.width = '24px';
-    icon.style.height = '24px';
-    icon.style.backgroundSize = 'cover';
-    icon.style.backgroundImage = 'url(/images/ic_launcher.png)';
+  // icon
+  const icon = document.createElement('div');
+  icon.style.width = '24px';
+  icon.style.height = '24px';
+  icon.style.backgroundSize = 'cover';
+  icon.style.backgroundImage = 'url(/images/ic_launcher.png)';
 
-    // label
-    const label = document.createElement('span');
-    label.textContent = home.name;
-    label.style.color = 'white';
-    label.style.fontSize = '14px';
-    label.style.fontWeight = '500';
-    label.style.padding = '2px 6px';
-    label.style.borderRadius = '4px';
-    label.style.boxShadow = '0 0 4px rgba(0,0,0,0.2)';
-    label.style.background = home.status ? 'green' : 'red';
+  // label
+  const label = document.createElement('span');
+  label.textContent = home.name;
+  label.style.color = 'white';
+  label.style.fontSize = '14px';
+  label.style.fontWeight = '500';
+  label.style.padding = '2px 6px';
+  label.style.borderRadius = '4px';
+  label.style.boxShadow = '0 0 4px rgba(0,0,0,0.2)';
+  label.style.background = home.status ? 'green' : 'red';
 
-    container.appendChild(icon);
-    container.appendChild(label);
+  container.appendChild(icon);
+  container.appendChild(label);
 
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false
-    }).setText(home.address || 'No address'); // home.address là chuỗi địa chỉ
+  // popup hover
+  const popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  }).setText(home.address || 'No address');
 
-    container.addEventListener('mouseenter', () => popup.addTo(map).setLngLat([home.long, home.lat]));
-    container.addEventListener('mouseleave', () => popup.remove());
+  container.addEventListener('mouseenter', () =>
+    popup.addTo(map).setLngLat([home.long, home.lat])
+  );
+  container.addEventListener('mouseleave', () => popup.remove());
 
-    return container;
-  }
+  // click chuyển tới trang detail
+  container.addEventListener('click', () => {
+    goto(`/homes/${home.id}`);
+  });
+
+  return container;
+}
 
   onMount(async () => {
     const mapboxgl = await import('mapbox-gl');
